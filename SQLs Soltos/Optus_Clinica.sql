@@ -1,0 +1,97 @@
+CREATE DATABASE OPTUS_TARDE;
+
+USE OPTUS_TARDE;
+
+CREATE TABLE TiposUsuario(
+	IdTipoUsuario INT PRIMARY KEY IDENTITY,
+	Titulo VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Usuarios(
+	IdUsuario INT PRIMARY KEY IDENTITY,
+	IdTipoUsuario INT FOREIGN KEY REFERENCES TiposUsuario (IdTipoUsuario),
+	Nome VARCHAR(30)
+);
+
+CREATE TABLE Artistas (
+	IdArtista INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE Albuns (
+	IdAlbum INT PRIMARY KEY IDENTITY,
+	IdArtista INT FOREIGN KEY REFERENCES Artistas (IdArtista),
+	IdEstilo INT FOREIGN KEY REFERENCES Estilos (IdEstilo),
+	Nome VARCHAR(50) NOT NULL,
+	DataLancamento DATE ,
+	QtdMinutos TIME,
+	Visualizacao INT
+);
+
+CREATE TABLE Estilos (
+	IdEstilo INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(50)
+);
+
+SELECT * FROM Albuns;
+
+ALTER TABLE Usuarios 
+ADD Email VARCHAR(50);
+
+
+CREATE DATABASE Clinica_Tarde;
+
+Use Clinica_Tarde;
+
+CREATE TABLE Clinicas (
+	IdClinica INT PRIMARY KEY IDENTITY,
+	RazaoSocial VARCHAR(50) NOT NULL,
+	Endereco VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Donos(
+	IdDono INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(50) NOT NULL,
+	Telefone INT NOT NULL 
+);
+
+CREATE TABLE TipoPet(
+	IdTipoPet INT PRIMARY KEY IDENTITY,
+	Titulo VARCHAR(50)
+);
+
+CREATE TABLE Veterinarios (
+	IdVeterinario INT PRIMARY KEY IDENTITY,
+	IdClinica INT FOREIGN KEY REFERENCES Clinicas (IdClinica),
+	Nome VARCHAR(50) NOT NULL ,
+	CRMV INT NOT NULL
+);
+
+CREATE TABLE Pets (
+	IdPet INT PRIMARY KEY IDENTITY,
+	IdDono INT FOREIGN KEY REFERENCES Donos (IdDono),
+	IdRaca INT FOREIGN KEY REFERENCES Racas (IdRaca),
+	NomePet VARCHAR(50) NOT NULL,
+);
+
+CREATE TABLE Racas(
+	IdRaca INT PRIMARY KEY IDENTITY,
+	IdTipoPet INT FOREIGN KEY REFERENCES TipoPet (IdTipoPet),
+	Titulo VARCHAR(50)
+);
+
+CREATE TABLE Atendimentos (
+	IdAtendimento INT PRIMARY KEY IDENTITY,
+	IdVeterinario INT FOREIGN KEY REFERENCES Veterinarios (IdVeterinario),
+	IdPet INT FOREIGN KEY REFERENCES Pets (IdPet),
+	DataAtendimento DATE NOT NULL,
+	Observacoes VARCHAR(250)
+);
+
+ALTER TABLE Donos
+DROP COLUMN Telefone
+
+SELECT * FROM Pets;
+
+Alter table Pets
+Add Telefone VARCHAR(15); 
