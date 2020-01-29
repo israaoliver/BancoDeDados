@@ -1,0 +1,46 @@
+CREATE DATABASE Locadora_Tarde
+Use Locadora_Tarde
+
+CREATE TABLE Clientes (
+	IdCliente INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(50) NOT NULL,
+	Telefone VARCHAR(15) NOT NULL  ,
+	Email VARCHAR(50),
+	Endereço VARCHAR(100)
+);
+
+CREATE TABLE Marcas(
+	IdMarca INT PRIMARY KEY IDENTITY,
+	Titulo VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Modelo(
+	IdModelo INT PRIMARY KEY IDENTITY,
+	IdMarca INT FOREIGN KEY REFERENCES Marcas (IdMarca),
+	Titulo VARCHAR(50)
+);
+
+CREATE TABLE Veiculos (
+	IdVeiculo INT PRIMARY KEY IDENTITY,
+	IdModelo INT FOREIGN KEY REFERENCES Modelo (Idmodelo),
+	Placa CHAR(7) NOT NULL,
+	AnoVeiculo DATE NOT NULL 
+);
+
+ALTER TABLE Veiculos
+DROP COLUMN Placa;
+ALTER TABLE Veiculos
+ADD Placa CHAR(7) NOT NULL;
+
+SELECT * FROM Veiculos;
+
+CREATE TABLE Alugueis (
+	IdAluguel INT PRIMARY KEY IDENTITY,
+	IdCliente INT FOREIGN KEY REFERENCES Clientes (IdCliente),
+	IdVeiculo INT FOREIGN KEY REFERENCES Veiculos (IdVeiculo),
+	DataAluguel DATE,
+	DataDevolucao DATE,
+
+);
+
+

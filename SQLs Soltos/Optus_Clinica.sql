@@ -24,9 +24,10 @@ CREATE TABLE Albuns (
 	IdEstilo INT FOREIGN KEY REFERENCES Estilos (IdEstilo),
 	Nome VARCHAR(50) NOT NULL,
 	DataLancamento DATE ,
-	QtdMinutos TIME,
+	QtdMinutos BIGINT,
 	Visualizacao INT
 );
+
 
 CREATE TABLE Estilos (
 	IdEstilo INT PRIMARY KEY IDENTITY,
