@@ -21,9 +21,7 @@ CREATE TABLE Livros(
 	Titulo VARCHAR(100) NOT NULL UNIQUE
 );
 
-SELECT * FROM Generos;
-SELECT * FROM Autores;
-SELECT * FROM Livros;
+
 
 
 INSERT INTO Generos (Nome)
@@ -61,3 +59,15 @@ WHERE IdLivro = 2;
 
 DELETE FROM Autores
 WHERE IdAutor = 7;
+
+
+SELECT * FROM Generos;
+SELECT * FROM Autores;
+SELECT * FROM Livros;
+
+SELECT Titulo, IdAutor FROM Livros ;
+
+SELECT Titulo, IdGenero FROM Livros ;
+
+SELECT Titulo, IdAutor, IdGenero FROM Livros ;
+
